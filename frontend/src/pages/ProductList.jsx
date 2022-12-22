@@ -1,0 +1,182 @@
+import { Component } from "react";
+import ProductCard from "../components/Product/ProductCard";
+import withRouter from "../components/HOC/withRouter";
+
+class ProductList extends Component {
+  state = {
+    products: [],
+    checkedProducts: [],
+  };
+
+  componentDidMount() {
+    this.fetchProducts();
+  }
+  /*  fetchProducts = async () => {
+    const response = await fetch(
+      "http://localhost/sefaesendemir-scandiwebjuniortest/backend/api/product/read"
+    );
+    const products = await response.json();
+    this.setState({ products: products });
+  };*/
+
+  fetchProducts = async () => {
+    try {
+      const response = await fetch(
+        "http://localhost/sefaesendemir-scandiwebjuniortest/backend/api/product/read"
+      );
+      const products = await response.json();
+      this.setState({ products });
+      console.log(products);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  /*  deleteCheckedProducts = async () => {
+    if (this.state.checkedProducts.length > 0) {
+      const productsToDelete = {
+        id: this.state.checkedProducts,
+      };
+      const response = await fetch(
+        "http://localhost/sefaesendemir-scandiwebjuniortest/backend/api/product/delete",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(productsToDelete),
+        }
+      );
+      this.setState((prevState) => {
+        const filteredProducts = prevState.products.filter(
+          (product) => !prevState.checkedProducts.includes(product.id)
+        );
+        return { products: filteredProducts, checkedProducts: [] };
+      });
+    } else {
+      return true;
+    }
+  };*/
+
+  deleteCheckedProducts = async () => {
+    try {
+      if (this.state.checkedProducts.length > 0) {
+        const productsToDelete = {
+          id: this.state.checkedProducts,
+        };
+        await fetch(
+          "http://localhost/sefaesendemir-scandiwebjuniortest/backend/api/product/delete",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(productsToDelete),
+          }
+        );
+        this.setState((prevState) => {
+          const filteredProducts = prevState.products.filter(
+            (product) => !prevState.checkedProducts.includes(product.id)
+          );
+          return { products: filteredProducts, checkedProducts: [] };
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  /*  checkProduct = (id) => {
+    this.setState((prevState) => {
+      if (!prevState.checkedProducts.includes(id)) {
+        this.state.checkedProducts.push(id);
+      }
+    });
+    console.log(this.state.checkedProducts);
+  };*/
+
+  checkProduct = (id) => {
+    this.setState((prevState) => {
+      if (!prevState.checkedProducts.includes(id)) {
+        const checkedProducts = [...prevState.checkedProducts, id];
+        return { checkedProducts };
+      }
+    });
+  };
+
+  unCheckProduct = (id) => {
+    this.setState((prevState) => {
+      const checkedProducts = prevState.checkedProducts.filter(
+        (item) => item !== id
+      );
+      return { checkedProducts: checkedProducts };
+    });
+    console.log(this.state.checkedProducts);
+  };
+
+  render() {
+    console.log(this.state.checkedProducts);
+    const { products } = this.state;
+    console.log(products);
+    return (
+      <div className="container">
+        <div className="product-list__header">
+          <div className="product-list__title">Product List</div>
+          <div className="product-list__buttons">
+            <button
+              className="product-list__button product-list__button--add"
+              onClick={() => this.props.router.navigate("/addproduct")}
+            >
+              Add
+            </button>
+            <button
+              className="product-list__button product-list__button--delete"
+              id="delete-product-btn"
+              onClick={this.deleteCheckedProducts}
+            >
+              {this.state.checkedProducts.length > 1 ? "Mass Delete" : "Delete"}
+            </button>
+          </div>
+        </div>
+        <div className="product-list">
+          {products.length ? (
+            products.map(
+              ({
+                id,
+                sku,
+                name,
+                price,
+                size,
+                height,
+                width,
+                length,
+                weight,
+                type_id,
+              }) => (
+                <ProductCard
+                  key={id}
+                  id={id}
+                  sku={sku}
+                  name={name}
+                  price={parseFloat(price).toFixed(2)}
+                  size={size}
+                  height={height}
+                  width={width}
+                  length={length}
+                  weight={parseFloat(weight).toFixed(2)}
+                  type={type_id}
+                  checkProduct={this.checkProduct}
+                  unCheckProduct={this.unCheckProduct}
+                />
+              )
+            )
+          ) : (
+            <div className="no-product">No products found..</div>
+          )}
+        </div>
+      </div>
+    );
+  }
+}
+
+export default withRouter(ProductList);
