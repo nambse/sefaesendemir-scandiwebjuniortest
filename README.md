@@ -26,3 +26,6 @@ After that, you can start the frontend by running the following command:
 yarn start
 ```
 
+## Auto QA Test Result
+
+![](./frontend/public/scandiwebjuniortest.gif)
