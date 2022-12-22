@@ -28,4 +28,4 @@ yarn start
 
 ## Auto QA Test Result
 
-![](./frontend/public/scandiwebjuniortest.gif)
+![](./frontend/public/scandiwebjuniortestQA.gif)
