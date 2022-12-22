@@ -4,7 +4,6 @@ export default class ProductCard extends Component {
   checkboxRef = createRef();
 
   handleCardClick = (e) => {
-    console.log(e.target.className.target);
     if (e.target.className === "product-card") {
       this.checkboxRef.current.click();
     }
@@ -27,7 +26,6 @@ export default class ProductCard extends Component {
     } = this.props;
 
     const dimensions = `${height}x${width}x${length}`;
-    console.log(type);
     return (
       <div className="product-card" onClick={(e) => this.handleCardClick(e)}>
         <input

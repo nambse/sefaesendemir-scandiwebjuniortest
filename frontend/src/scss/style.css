@@ -1,3 +1,13 @@
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
 .container {
   margin: 50px;
 }
@@ -139,9 +149,6 @@
 }
 .product-form .product-form__input-group .product-form__label .product-form__select {
   width: 50%;
-}
-.product-form .product-form__input-group .product-form__label .product-form__input {
-  accent-color: #4caf50;
 }
 .product-form .product-form__input-group .product-form__special-description {
   display: flex;

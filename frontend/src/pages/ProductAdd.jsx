@@ -19,7 +19,6 @@ class ProductAdd extends Component {
     this.setState({
       [e.target.name]: e.target.value,
     });
-    console.log(this.state);
   };
 
   handleSubmit = (event) => {
@@ -49,8 +48,8 @@ class ProductAdd extends Component {
       weight: weight,
       type_id: typeId,
     };
-    const response = await fetch(
-      "http://localhost/sefaesendemir-scandiwebjuniortest/backend/api/product/create",
+    await fetch(
+      "https://scandiwebjuniortest-sefaesendemir.000webhostapp.com/api/product/create.php",
       {
         method: "POST",
         headers: {
@@ -59,15 +58,11 @@ class ProductAdd extends Component {
         body: JSON.stringify(productToSend),
       }
     );
-    const data = await response.json;
-    console.log(data);
-    console.log(response.body);
     this.props.router.navigate("/");
   };
 
   handleTypeChange = (event) => {
     this.setState({ type: event.target.value });
-    console.log(event.target.value);
   };
 
   render() {

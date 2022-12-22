@@ -11,53 +11,19 @@ class ProductList extends Component {
   componentDidMount() {
     this.fetchProducts();
   }
-  /*  fetchProducts = async () => {
-    const response = await fetch(
-      "http://localhost/sefaesendemir-scandiwebjuniortest/backend/api/product/read"
-    );
-    const products = await response.json();
-    this.setState({ products: products });
-  };*/
 
   // https://scandiwebjuniortest-sefaesendemir.000webhostapp.com/api/product/read.php
   fetchProducts = async () => {
     try {
       const response = await fetch(
-        "http://localhost/sefaesendemir-scandiwebjuniortest/backend/api/product/read"
+        "https://scandiwebjuniortest-sefaesendemir.000webhostapp.com/api/product/read.php"
       );
       const products = await response.json();
       this.setState({ products });
-      console.log(products);
     } catch (error) {
       console.log(error);
     }
   };
-
-  /*  deleteCheckedProducts = async () => {
-    if (this.state.checkedProducts.length > 0) {
-      const productsToDelete = {
-        id: this.state.checkedProducts,
-      };
-      const response = await fetch(
-        "http://localhost/sefaesendemir-scandiwebjuniortest/backend/api/product/delete",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(productsToDelete),
-        }
-      );
-      this.setState((prevState) => {
-        const filteredProducts = prevState.products.filter(
-          (product) => !prevState.checkedProducts.includes(product.id)
-        );
-        return { products: filteredProducts, checkedProducts: [] };
-      });
-    } else {
-      return true;
-    }
-  };*/
 
   deleteCheckedProducts = async () => {
     await this.findCheckedProducts();
@@ -67,7 +33,7 @@ class ProductList extends Component {
           id: this.state.checkedProducts,
         };
         await fetch(
-          "http://localhost/sefaesendemir-scandiwebjuniortest/backend/api/product/delete",
+          "https://scandiwebjuniortest-sefaesendemir.000webhostapp.com/api/product/delete.php",
           {
             method: "POST",
             headers: {
@@ -100,15 +66,6 @@ class ProductList extends Component {
     }
   };
 
-  /*  checkProduct = (id) => {
-    this.setState((prevState) => {
-      if (!prevState.checkedProducts.includes(id)) {
-        this.state.checkedProducts.push(id);
-      }
-    });
-    console.log(this.state.checkedProducts);
-  };*/
-
   checkProduct = (id) => {
     this.setState((prevState) => {
       if (!prevState.checkedProducts.includes(id)) {
@@ -125,13 +82,10 @@ class ProductList extends Component {
       );
       return { checkedProducts: checkedProducts };
     });
-    console.log(this.state.checkedProducts);
   };
 
   render() {
-    console.log(this.state.checkedProducts);
     const { products } = this.state;
-    console.log(products);
     return (
       <div className="container">
         <div className="product-list__header">
