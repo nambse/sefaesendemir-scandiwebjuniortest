@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import withRouter from "../components/HOC/withRouter";
+import BASE_URL from "../api";
 
 class ProductAdd extends Component {
   state = {
@@ -48,16 +49,13 @@ class ProductAdd extends Component {
       weight: weight,
       type_id: typeId,
     };
-    await fetch(
-      "https://scandiwebjuniortest-sefaesendemir.000webhostapp.com/api/product/create.php",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(productToSend),
-      }
-    );
+    await fetch(`${BASE_URL}/product/create.php`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(productToSend),
+    });
     this.props.router.navigate("/");
   };
 
