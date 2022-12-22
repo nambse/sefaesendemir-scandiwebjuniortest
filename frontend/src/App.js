@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ProductList from "./pages/ProductList";
 import "./scss/style.scss";
 import ProductAdd from "./pages/ProductAdd";

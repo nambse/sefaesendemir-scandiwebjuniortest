@@ -30,7 +30,6 @@
   font-size: 16px;
   margin: 0 10px;
   padding: 10px 20px;
-  text-transform: uppercase;
   transition: background-color 0.2s, color 0.2s;
 }
 .container .product-list__header .product-list__buttons .product-list__button--add {

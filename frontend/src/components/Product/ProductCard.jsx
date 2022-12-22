@@ -31,6 +31,7 @@ export default class ProductCard extends Component {
     return (
       <div className="product-card" onClick={(e) => this.handleCardClick(e)}>
         <input
+          id={id}
           type="checkbox"
           className="delete-checkbox"
           value={id}

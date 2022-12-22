@@ -19,6 +19,7 @@ class ProductList extends Component {
     this.setState({ products: products });
   };*/
 
+  // https://scandiwebjuniortest-sefaesendemir.000webhostapp.com/api/product/read.php
   fetchProducts = async () => {
     try {
       const response = await fetch(
@@ -59,6 +60,7 @@ class ProductList extends Component {
   };*/
 
   deleteCheckedProducts = async () => {
+    await this.findCheckedProducts();
     try {
       if (this.state.checkedProducts.length > 0) {
         const productsToDelete = {
@@ -83,6 +85,18 @@ class ProductList extends Component {
       }
     } catch (error) {
       console.log(error);
+    }
+  };
+
+  //Extra function to be sure about getting all the checked products.
+  findCheckedProducts = () => {
+    const checkboxes = document.getElementsByClassName("delete-checkbox");
+    for (let i = 0; i < checkboxes.length; i++) {
+      if (!this.state.checkedProducts.includes(checkboxes[i].id)) {
+        if (checkboxes[i].checked === true) {
+          this.state.checkedProducts.push(checkboxes[i].id);
+        }
+      }
     }
   };
 
@@ -127,14 +141,14 @@ class ProductList extends Component {
               className="product-list__button product-list__button--add"
               onClick={() => this.props.router.navigate("/addproduct")}
             >
-              Add
+              ADD
             </button>
             <button
               className="product-list__button product-list__button--delete"
               id="delete-product-btn"
               onClick={this.deleteCheckedProducts}
             >
-              {this.state.checkedProducts.length > 1 ? "Mass Delete" : "Delete"}
+              MASS DELETE
             </button>
           </div>
         </div>
