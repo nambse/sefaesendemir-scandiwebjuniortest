@@ -1,4 +1,4 @@
 const BASE_URL =
-  "http://localhost/sefaesendemir-scandiwebjuniortest/backend/api";
+  "https://scandiwebjuniortest-sefaesendemir.000webhostapp.com/api/index.php";
 
 export default BASE_URL;

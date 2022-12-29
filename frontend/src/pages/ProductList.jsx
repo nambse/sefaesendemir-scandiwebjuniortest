@@ -16,7 +16,9 @@ class ProductList extends Component {
   // https://scandiwebjuniortest-sefaesendemir.000webhostapp.com/api/product/read.php
   fetchProducts = async () => {
     try {
-      const response = await fetch(`${BASE_URL}/product/read.php`);
+      const response = await fetch(`${BASE_URL}`, {
+        method: "GET",
+      });
       const products = await response.json();
       this.setState({ products });
     } catch (error) {
@@ -31,8 +33,8 @@ class ProductList extends Component {
         const productsToDelete = {
           id: this.state.checkedProducts,
         };
-        await fetch(`${BASE_URL}/product/delete.php`, {
-          method: "POST",
+        await fetch(`${BASE_URL}`, {
+          method: "DELETE",
           headers: {
             "Content-Type": "application/json",
           },

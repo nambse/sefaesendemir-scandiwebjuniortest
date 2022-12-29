@@ -30,7 +30,6 @@ class ProductAdd extends Component {
 
   handleAdd = async (e) => {
     //If form can be submitted add the product
-
     e.preventDefault();
 
     const { name, sku, price, size, height, width, length, weight, type } =
@@ -49,13 +48,22 @@ class ProductAdd extends Component {
       weight: weight,
       type_id: typeId,
     };
-    await fetch(`${BASE_URL}/product/create.php`, {
+    const response = await fetch(`${BASE_URL}`, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
       body: JSON.stringify(productToSend),
     });
+    const data = await response.json();
+    //Check if the product is added successfully or the sku is already in use
+    if (
+      data.message ===
+      `SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '${sku}' for key 'sku'`
+    ) {
+      document.getElementById("sku").style.border = "2px solid red";
+      document.getElementById("sku").value = "";
+      document.getElementById("sku").placeholder = "SKU is already in use.";
+      return;
+    }
+    //If the product is added successfully, redirect to the product list page
     this.props.router.navigate("/");
   };
 
@@ -102,6 +110,11 @@ class ProductAdd extends Component {
                 required
                 value={this.state.sku}
                 onChange={this.handleChange}
+                onClick={() => {
+                  document.getElementById("sku").style.border =
+                    "1px solid #ddd";
+                  document.getElementById("sku").placeholder = "";
+                }}
               />
             </label>
             <br />

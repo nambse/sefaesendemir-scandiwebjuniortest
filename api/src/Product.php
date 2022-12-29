@@ -1,83 +1,27 @@
 <?php
-class Product {
-    // DB stuff
+class Product extends ProductAbstract
+{
     private $conn;
     private $table = 'products';
 
-    // Product Properties
-    public $id;
-    public $sku;
-    public $name;
-    public $price;
-    public $type_name;
-    public $type_id;
-    public $size;
-    public $height;
-    public $width;
-    public $length;
-    public $weight;
-
     // Constructor with DB
-    public function __construct($db) {
+    public function __construct($db)
+    {
         $this->conn = $db;
     }
 
-    // Get Products
-    public function read() {
-        // Create query
-        $query = 'SELECT t.name as type_name, p.id, p.sku, p.name, p.price, p.type_id, p.size, p.height, p.width, p.length, p.weight
-                                FROM ' . $this->table . ' p
-                                LEFT JOIN
-                                  types t ON p.type_id = t.id
-                                ORDER BY
-                                  p.id DESC';
+    public function createProduct($data)
+    {
+        $this->sku = $data->sku;
+        $this->name = $data->name;
+        $this->type_id = $data->type_id;
+        $this->price = $data->price;
+        $this->size = $data->size;
+        $this->height = $data->height;
+        $this->width = $data->width;
+        $this->length = $data->length;
+        $this->weight = $data->weight;
 
-        // Prepare statement
-        $stmt = $this->conn->prepare($query);
-
-        // Execute query
-        $stmt->execute();
-
-        return $stmt;
-    }
-
-    // Get Single Product
-    public function read_single() {
-        // Create query
-        $query = 'SELECT t.name as type_name, p.id, p.sku, p.name, p.price, p.type_id, p.size, p.height, p.width, p.length, p.weight
-                                FROM ' . $this->table . ' p
-                                LEFT JOIN
-                                  types t ON p.category_id = t.id
-                                    WHERE
-                                      p.id = ?
-                                    LIMIT 0,1';
-
-        // Prepare statement
-        $stmt = $this->conn->prepare($query);
-
-        // Bind ID
-        $stmt->bindParam(1, $this->id);
-
-        // Execute query
-        $stmt->execute();
-
-        $row = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        // Set properties
-        $this->sku = $row['sku'];
-        $this->name = $row['name'];
-        $this->price = $row['price'];
-        $this->type_id = $row['type_id'];
-        $this->type_name = $row['type_name'];
-        $this->size = $row['size'];
-        $this->height = $row['height'];
-        $this->width = $row['width'];
-        $this->length = $row['length'];
-        $this->weight = $row['weight'];
-    }
-
-    // Create Product
-    public function create() {
         // Create query
         $query = 'INSERT INTO ' . $this->table . ' SET sku = :sku, name = :name, price = :price, type_id = :type_id, size = :size, height = :height, width = :width, length = :length, weight = :weight';
 
@@ -108,7 +52,7 @@ class Product {
 
 
         // Execute query
-        if($stmt->execute()) {
+        if ($stmt->execute()) {
             return true;
         }
 
@@ -118,8 +62,29 @@ class Product {
         return false;
     }
 
-    // Delete Products
-    public function delete() {
+    public function getAllProducts()
+    {
+        // Create query
+        $query = 'SELECT t.name as type_name, p.id, p.sku, p.name, p.price, p.type_id, p.size, p.height, p.width, p.length, p.weight
+                                FROM ' . $this->table . ' p
+                                LEFT JOIN
+                                  types t ON p.type_id = t.id
+                                ORDER BY
+                                  p.id DESC';
+
+        // Prepare statement
+        $stmt = $this->conn->prepare($query);
+
+        // Execute query
+        $stmt->execute();
+
+        return $stmt;
+    }
+
+    public function deleteProducts($data)
+    {
+        $this->id = $data->id;
+
         // Create query
         $query = 'DELETE FROM ' . $this->table . ' WHERE id IN (';
         $query .= implode(',', array_fill(0, count($this->id), '?'));
@@ -141,3 +106,4 @@ class Product {
         return false;
     }
 }
+
