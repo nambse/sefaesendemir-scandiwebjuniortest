@@ -16,7 +16,8 @@ header('Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type,
 $parts = explode("/", $_SERVER["REQUEST_URI"]);
 $data = json_decode(file_get_contents("php://input"));
 
-if ($parts[2] != "api") {
+//This part should be updated with respect to URL Structure
+if ($parts[1] != "api") {
     http_response_code(404);
     exit;
 }
@@ -30,7 +31,8 @@ if($method == "OPTIONS")
     exit;
 }
 else{
-$operation = $parts[3];
+//This part should be updated with respect to URL Structure
+$operation = $parts[2];
 
 $database = new Database("localhost", "scandiwebdb", "root", "" );
 $db = $database->connect();
