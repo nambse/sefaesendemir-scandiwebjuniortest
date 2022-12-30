@@ -16,14 +16,25 @@ header('Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type,
 $parts = explode("/", $_SERVER["REQUEST_URI"]);
 $data = json_decode(file_get_contents("php://input"));
 
-
 if ($parts[2] != "api") {
     http_response_code(404);
     exit;
 }
 
+$method = $_SERVER["REQUEST_METHOD"];
+
+//To prevent CORS error
+if($method == "OPTIONS")
+{
+    http_response_code(200);
+    exit;
+}
+else{
+$operation = $parts[3];
+
 $database = new Database("localhost", "scandiwebdb", "root", "" );
 $db = $database->connect();
 $product = new Product($db);
 $controller = new ProductController($product);
-$controller->processRequest($_SERVER["REQUEST_METHOD"], $data);
+$controller->processRequest($operation, $data);
+}

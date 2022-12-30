@@ -48,7 +48,7 @@ class ProductAdd extends Component {
       weight: weight,
       type_id: typeId,
     };
-    const response = await fetch(`${BASE_URL}`, {
+    const response = await fetch(`${BASE_URL}/create`, {
       method: "POST",
       body: JSON.stringify(productToSend),
     });

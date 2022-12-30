@@ -5,23 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="19e7d08d-f520-4617-860f-347636d158d3" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/api.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Database.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ErrorHandler.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Product.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ProductAbstract.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ProductController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/api/product/create.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/api/product/delete.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/api/product/read.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/config/Database.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/models/Product.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/api.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/api.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.htaccess" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ProductController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProductController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../frontend/src/pages/ProductAdd.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/pages/ProductAdd.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../frontend/src/pages/ProductList.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/pages/ProductList.jsx" afterDir="false" />
     </list>
@@ -55,6 +42,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "settings.javascript.prettier",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -68,10 +56,17 @@
       <updated>1672264467749</updated>
       <workItem from="1672264469009" duration="1921000" />
       <workItem from="1672299131826" duration="13387000" />
+      <workItem from="1672325990258" duration="3844000" />
+      <workItem from="1672349542423" duration="1658000" />
+      <workItem from="1672382569930" duration="1342000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

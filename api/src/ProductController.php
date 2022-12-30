@@ -8,30 +8,25 @@ class ProductController{
         $this->product = $product;
     }
 
-    public function processRequest($method, $data){
-        if($data)
+    public function processRequest($operation, $data){
+        if($operation == "create" || $operation == "delete")
         {
-            $this->processResourceRequest($method, $data);
+            $this->processResourceRequest($operation, $data);
+        }
+        else if($operation == "read")
+        {
+            $this->processReadRequest();
         }
         else
         {
-            //To prevent CORS error
-            if($method == "OPTIONS")
-            {
-                http_response_code(200);
-                exit;
-            }
-            else
-            {
-                $this->getAllProducts($method);
-            }
+            http_response_code(404);
+            exit;
         }
     }
 
-    private function processResourceRequest($method, $data){
-        switch ($method) {
-            case "POST":
-                if($this->product->createProduct($data))
+    private function processResourceRequest($operation, $data){
+        if ($operation == "create") {
+            if($this->product->createProduct($data))
                 {
                     http_response_code(200);
                     echo json_encode(
@@ -44,9 +39,9 @@ class ProductController{
                         array('message' => 'Product Not Created')
                     );
                 }
-            break;
+        }
 
-            case "DELETE":
+         if($operation == "delete"){
                 if($this->product->deleteProducts($data)){
                     http_response_code(200);
                     echo json_encode(array("message" => "Product(s) were deleted."));
@@ -54,17 +49,15 @@ class ProductController{
                     http_response_code(503);
                     echo json_encode(array("message" => "Unable to delete product(s)."));
                 }
-            break;
-
-            default:
-                http_response_code(405);
-                header("Allow: POST, DELETE");
         }
+         else {
+             http_response_code(404);
+             exit;
+         }
     }
 
-    private function getAllProducts($method)
+    private function processReadRequest()
     {
-        if ($method == "POST" || $method === "GET") {
             // Product query
             $result = $this->product->getAllProducts();
 
@@ -102,18 +95,13 @@ class ProductController{
                 http_response_code(200);
                 echo json_encode($products_arr);
 
-            } else {
+            }
+            else{
                 // No Products
                 http_response_code(503);
                 echo json_encode(
                     array('message' => 'No Products Found')
                 );
             }
-
-        }
-        else{
-            http_response_code(405);
-            header("Allow: GET, POST");
-        }
     }
 }
